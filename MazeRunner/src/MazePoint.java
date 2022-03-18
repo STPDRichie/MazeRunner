@@ -6,4 +6,8 @@ public class MazePoint {
         this.x = x;
         this.y = y;
     }
+
+    public static String toString(MazePoint point) {
+        return point.x + " " + point.y;
+    }
 }
