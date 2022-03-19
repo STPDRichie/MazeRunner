@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         try {
-            File input = new File("../input.txt");
+            File input = new File("input.txt");
             Scanner scanner = new Scanner(input);
 
             var rowCount = Integer.parseInt(scanner.nextLine());
@@ -23,7 +23,7 @@ public class Main {
                     new MazePoint(Integer.parseInt(start[0]) - 1, Integer.parseInt(start[1]) - 1),
                     new MazePoint(Integer.parseInt(end[0]) - 1, Integer.parseInt(end[1]) - 1));
 
-            FileWriter writer = new FileWriter("../output.txt");
+            FileWriter writer = new FileWriter("output.txt");
             writer.write(String.join("\n", resultArray));
             writer.close();
         } catch (FileNotFoundException e) {
