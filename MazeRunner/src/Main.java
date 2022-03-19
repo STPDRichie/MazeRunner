@@ -1,7 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 public class Main {
@@ -27,7 +24,6 @@ public class Main {
                     new MazePoint(Integer.parseInt(end[0]) - 1, Integer.parseInt(end[1]) - 1));
 
             FileWriter writer = new FileWriter("../output.txt");
-
             writer.write(String.join("\n", resultArray));
             writer.close();
         } catch (FileNotFoundException e) {
