@@ -28,13 +28,7 @@ public class Main {
 
             FileWriter writer = new FileWriter("../output.txt");
 
-            if (resultArray.length == 1)
-                writer.write("N");
-            else {
-                writer.write("Y");
-                for (var string : resultArray)
-                    writer.write("\n" + string);
-            }
+            writer.write(String.join("\n", resultArray));
             writer.close();
         } catch (FileNotFoundException e) {
             System.out.println("File not found...");

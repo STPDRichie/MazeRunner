@@ -1,6 +1,4 @@
-import java.util.Comparator;
 import java.util.LinkedList;
-import java.util.stream.Collectors;
 
 public class MazeRunner {
     public MazeState[][] maze;
@@ -25,7 +23,8 @@ public class MazeRunner {
         if (maze[start.x][start.y] == MazeState.Wall || maze[end.x][end.y] == MazeState.Wall)
             return new String[] {"N"};
 
-        var requiredPaths = new LinkedList<SinglyLinkedList>();
+        SinglyLinkedList requiredPath = null;
+        var requiredPathLength = Integer.MAX_VALUE;
 
         var paths = new LinkedList<SinglyLinkedList>();
 
@@ -43,20 +42,24 @@ public class MazeRunner {
             for (var x = -1; x <= 1; x++)
                 for (var y = -1; y <= 1; y++) {
                     if (Math.abs(x) + Math.abs(y) != 2 && !(x == 0 && y == 0)) {
-                        if (currentPoint.x + x == end.x && currentPoint.y + y == end.y)
-                            requiredPaths.add(new SinglyLinkedList(
-                                    new MazePoint(currentPoint.x + x, currentPoint.y + y), path));
+                        if (currentPoint.x + x == end.x && currentPoint.y + y == end.y) {
+                            var currentPath = new SinglyLinkedList(
+                                    new MazePoint(currentPoint.x + x, currentPoint.y + y), path);
+                            if (currentPath.length < requiredPathLength) {
+                                requiredPathLength = currentPath.length;
+                                requiredPath = currentPath;
+                            }
+                        }
                         else if (maze[currentPoint.x + x][currentPoint.y + y] == MazeState.Empty)
                             paths.push(new SinglyLinkedList(
                                     new MazePoint(currentPoint.x + x, currentPoint.y + y), path));
                     }
                 }
         }
-        if (requiredPaths.isEmpty())
+        if (requiredPath == null)
             return new String[] {"N"};
 
-        var resultList = requiredPaths.getFirst();
-        return pathToStringArray(resultList);
+        return pathToStringArray(requiredPath);
     }
 
     private boolean isPointIncorrect(MazePoint point) {
@@ -66,11 +69,12 @@ public class MazeRunner {
     }
 
     private String[] pathToStringArray(SinglyLinkedList path) {
-        var stringPath = new String[path.length];
+        var stringPath = new String[path.length + 1];
 
+        stringPath[0] = "Y";
         for (var i = path.length - 1; i >= 0; i--) {
             var move = new MazePoint(path.path[i].x, path.path[i].y);
-            stringPath[i] = MazePoint.toString(move);
+            stringPath[i + 1] = MazePoint.toString(move);
         }
 
         return stringPath;
