@@ -19,7 +19,7 @@ public class MazeRunner {
         }
     }
 
-    public String[] Run(MazePoint start, MazePoint end) {
+    public String[] run(MazePoint start, MazePoint end) {
         if (maze[start.x][start.y] == MazeState.Wall || maze[end.x][end.y] == MazeState.Wall)
             return new String[0];
 

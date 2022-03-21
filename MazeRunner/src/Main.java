@@ -19,7 +19,7 @@ public class Main {
             var start = scanner.nextLine().split(" ");
             var end = scanner.nextLine().split(" ");
 
-            var resultArray = mazeRunner.Run(
+            var resultArray = mazeRunner.run(
                     new MazePoint(Integer.parseInt(start[0]) - 1, Integer.parseInt(start[1]) - 1),
                     new MazePoint(Integer.parseInt(end[0]) - 1, Integer.parseInt(end[1]) - 1));
 
