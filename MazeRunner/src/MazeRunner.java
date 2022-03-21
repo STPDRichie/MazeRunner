@@ -21,7 +21,7 @@ public class MazeRunner {
 
     public String[] Run(MazePoint start, MazePoint end) {
         if (maze[start.x][start.y] == MazeState.Wall || maze[end.x][end.y] == MazeState.Wall)
-            return new String[] {"N"};
+            return new String[0];
 
         SinglyLinkedList requiredPath = null;
         var requiredPathLength = Integer.MAX_VALUE;
@@ -57,7 +57,7 @@ public class MazeRunner {
                 }
         }
         if (requiredPath == null)
-            return new String[] {"N"};
+            return new String[0];
 
         return pathToStringArray(requiredPath);
     }
@@ -69,12 +69,11 @@ public class MazeRunner {
     }
 
     private String[] pathToStringArray(SinglyLinkedList path) {
-        var stringPath = new String[path.length + 1];
+        var stringPath = new String[path.length];
 
-        stringPath[0] = "Y";
         for (var i = path.length - 1; i >= 0; i--) {
             var move = new MazePoint(path.path[i].x, path.path[i].y);
-            stringPath[i + 1] = MazePoint.toString(move);
+            stringPath[i] = MazePoint.toString(move);
         }
 
         return stringPath;

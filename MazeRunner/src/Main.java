@@ -24,7 +24,14 @@ public class Main {
                     new MazePoint(Integer.parseInt(end[0]) - 1, Integer.parseInt(end[1]) - 1));
 
             FileWriter writer = new FileWriter("output.txt");
-            writer.write(String.join("\n", resultArray));
+            if (resultArray.length != 0) {
+                writer.write("Y\n");
+                writer.write(String.join("\n", resultArray));
+            }
+            else
+                writer.write("N");
+
+//            writer.write(String.join("\n", resultArray));
             writer.close();
         } catch (FileNotFoundException e) {
             System.out.println("File not found...");
